@@ -1,34 +1,18 @@
-// Java 15
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Stream;
 
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
-import java.util.stream.*;
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
-
-    /*
-     * Complete the 'bonAppetit' function below.
-     *
-     * The function accepts following parameters:
-     *  1. INTEGER_ARRAY bill
-     *  2. INTEGER k
-     *  3. INTEGER b
-     */
-
+class Solution {
     public static void bonAppetit(List<Integer> bill, int k, int b) {
         var result = 0;
         bill.remove(k);
         int pay = bill.stream().reduce(0, (element1, element2) -> element1 + element2);
         int cost = pay / 2;
-        
+
         if(cost == b) {
             System.out.println("Bon Appetit");
         } else {
@@ -36,10 +20,9 @@ class Result {
             System.out.println(result);
         }
     }
-
 }
 
-public class Solution {
+public class BillDivision2 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -50,12 +33,12 @@ public class Solution {
         int k = Integer.parseInt(firstMultipleInput[1]);
 
         List<Integer> bill = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-            .map(Integer::parseInt)
-            .collect(toList());
+                .map(Integer::parseInt)
+                .collect(toList());
 
         int b = Integer.parseInt(bufferedReader.readLine().trim());
 
-        Result.bonAppetit(bill, k, b);
+        Solution.bonAppetit(bill, k, b);
 
         bufferedReader.close();
     }
